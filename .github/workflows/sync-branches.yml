@@ -1,0 +1,25 @@
+name: Sync Java Files
+
+on:
+  push:
+    branches: [dev]
+    paths:
+      - "**/*.java"
+
+jobs:
+  sync-branches:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          fetch-depth: 0
+
+      - name: Sync branches
+        env:
+          COMMIT_USER_NAME: github-actions[bot]
+          COMMIT_USER_EMAIL: 41898282+github-actions[bot]@users.noreply.github.com
+          COMMIT_AUTHOR: ${{ github.actor }} <${{ github.actor_id }}+${{ github.actor }}@users.noreply.github.com>
+        run: ./scripts/sync-branches.sh

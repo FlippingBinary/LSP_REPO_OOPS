@@ -1,3 +1,21 @@
 [tools]
 gradle = "latest"
 java = "latest"
+
+[tasks.build]
+run = "gradle build"
+sources = ["src/**/*.java"]
+outputs = ["build/**/*.class"]
+
+[tasks.test]
+run = "gradle test"
+
+[tasks.1]
+depends = ["build"]
+dir = "src/org/howard/edu/lsp/assignment1"
+run = 'java -cp "$MISE_PROJECT_ROOT"/build/classes/java/main org.howard.edu.lsp.assignment1.HelloWorld'
+
+[tasks.2]
+depends = ["build"]
+dir = "src/org/howard/edu/lsp/assignment2"
+run = 'java -cp "$MISE_PROJECT_ROOT"/build/classes/java/main org.howard.edu.lsp.assignment2.ETLPipeline'

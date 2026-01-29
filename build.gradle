@@ -1,10 +1,14 @@
 plugins {
   id 'java'
-  id 'application'
 }
 
 repositories {
   mavenCentral()
+}
+
+dependencies {
+  testImplementation 'org.junit.jupiter:junit-jupiter:5.10.2'
+  testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
 }
 
 sourceSets {
@@ -13,22 +17,17 @@ sourceSets {
       srcDirs = ['src']
     }
   }
+  test {
+    java {
+      srcDirs = ['test']
+    }
+  }
+}
+
+test {
+  useJUnitPlatform()
 }
 
 tasks.withType(JavaCompile).configureEach {
   options.release = 21
-}
-
-application {
-  mainClass = 'Router'
-}
-
-jar {
-  manifest {
-    attributes 'Main-Class': 'Router'
-  }
-}
-
-tasks.run.configure {
-  standardInput = System.in
 }

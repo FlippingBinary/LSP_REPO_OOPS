@@ -9,5 +9,3 @@ outputs = ["build/**/*.class"]
 
 [tasks.start]
 run = "gradle run -q"
-sources = ["src/**/*.java"]
-outputs = ["build/**/*.class"]

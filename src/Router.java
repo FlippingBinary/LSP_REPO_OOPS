@@ -3,6 +3,7 @@ import java.util.Scanner;
 import java.util.Arrays;
 
 import org.howard.edu.lsp.assignment1.HelloWorld;
+import org.howard.edu.lsp.assignment2.ETLPipeline;
 
 /**
  * A simple CLI router
@@ -33,6 +34,9 @@ public class Router {
     switch (choice) {
       case "1":
         HelloWorld.main(remainingArgs);
+        break;
+      case "2":
+        ETLPipeline.main(remainingArgs);
         break;
       default:
         System.out.println("Invalid choice.");

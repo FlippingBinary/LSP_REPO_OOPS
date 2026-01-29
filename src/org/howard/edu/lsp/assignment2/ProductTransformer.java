@@ -22,7 +22,7 @@ public class ProductTransformer {
         return transformed;
     }
 
-    private TransformedProduct transformProduct(Product product) {
+    public TransformedProduct transformProduct(Product product) {
         String originalCategory = product.getCategory();
         
         String name = product.getName().toUpperCase();
@@ -44,7 +44,7 @@ public class ProductTransformer {
         return new TransformedProduct(product.getProductId(), name, price, category, priceRange);
     }
 
-    private String determinePriceRange(BigDecimal price) {
+    public String determinePriceRange(BigDecimal price) {
         if (price.compareTo(LOW_THRESHOLD) <= 0) {
             return "Low";
         } else if (price.compareTo(MEDIUM_THRESHOLD) <= 0) {

@@ -4,31 +4,31 @@ import java.math.BigDecimal;
 
 /** A single product */
 public class Product {
-    private final int productId;
-    private final String name;
-    private final BigDecimal price;
-    private final String category;
+  private final int productId;
+  private final String name;
+  private final BigDecimal price;
+  private final String category;
 
-    public Product(int productId, String name, BigDecimal price, String category) {
-        this.productId = productId;
-        this.name = name;
-        this.price = price;
-        this.category = category;
-    }
+  public Product(int productId, String name, BigDecimal price, String category) {
+    this.productId = productId;
+    this.name = name;
+    this.price = price;
+    this.category = category;
+  }
 
-    public int getProductId() {
-        return productId;
-    }
+  public int getProductId() {
+    return productId;
+  }
 
-    public String getName() {
-        return name;
-    }
+  public String getName() {
+    return name;
+  }
 
-    public BigDecimal getPrice() {
-        return price;
-    }
+  public BigDecimal getPrice() {
+    return price;
+  }
 
-    public String getCategory() {
-        return category;
-    }
+  public String getCategory() {
+    return category;
+  }
 }

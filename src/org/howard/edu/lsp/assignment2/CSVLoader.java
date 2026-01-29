@@ -6,7 +6,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.List;
 
-/** Name: Jon Musselwhite */
+/** The CSV Loader writes products in CSV format */
 public class CSVLoader {
     private static final String OUTPUT_HEADER = "ProductID,Name,Price,Category,PriceRange";
 

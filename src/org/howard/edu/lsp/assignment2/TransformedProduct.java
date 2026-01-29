@@ -2,7 +2,7 @@ package org.howard.edu.lsp.assignment2;
 
 import java.math.BigDecimal;
 
-/** Name: Jon Musselwhite */
+/** A single product after transformations have been applied */
 public class TransformedProduct {
     private final int productId;
     private final String name;

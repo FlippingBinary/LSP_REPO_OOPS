@@ -6,7 +6,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.List;
 
-/** Extract, Transform, Load */
+/** Extract, Transform, Load pipeline processes CSV data according to requirements */
 public class ETLPipeline {
     private static final Path INPUT_PATH = Paths.get("data", "products.csv");
     private static final Path OUTPUT_PATH = Paths.get("data", "transformed_products.csv");

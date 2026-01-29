@@ -8,7 +8,7 @@ import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
 
-/** Name: Jon Musselwhite */
+/** The CSV extractor reads product data from a CSV-formatted string */
 public class CSVExtractor {
     private static final int EXPECTED_FIELD_COUNT = 4;
 

@@ -2,7 +2,7 @@ package org.howard.edu.lsp.assignment2;
 
 import java.math.BigDecimal;
 
-/** Name: Jon Musselwhite */
+/** A single product */
 public class Product {
     private final int productId;
     private final String name;

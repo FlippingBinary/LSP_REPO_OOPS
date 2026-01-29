@@ -2,7 +2,7 @@ package org.howard.edu.lsp.assignment2;
 
 import java.util.List;
 
-/** Name: Jon Musselwhite */
+/** ExtractResult holds the statistics that are required output */
 public class ExtractResult {
     private final List<Product> products;
     private final int rowsRead;

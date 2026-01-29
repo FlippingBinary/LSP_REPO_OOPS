@@ -5,7 +5,7 @@ import java.math.RoundingMode;
 import java.util.ArrayList;
 import java.util.List;
 
-/** Name: Jon Musselwhite */
+/** This convenience class converts product data according to requirements */
 public class ProductTransformer {
     private static final BigDecimal ELECTRONICS_DISCOUNT = new BigDecimal("0.90");
     private static final BigDecimal PREMIUM_THRESHOLD = new BigDecimal("500.00");

@@ -11,21 +11,30 @@ A Java console application with an assignment picker menu.
 
 ```text
 src/
-├── Router.java                           # Simple CLI router
-└── org/howard/edu/lsp/assignment1/
-    └── HelloWorld.java                   # Assignment 1: Hello World
+└── org/howard/edu/lsp/
+    ├── assignment1/
+    │   └── HelloWorld.java                 # Assignment 1: Hello World
+    └── assignment2/
+        ├── data/
+        │   ├── products.csv                # Input data
+        │   └── transformed_products.csv    # Expected output
+        └── ETLPipeline.java                # Assignment 2: ETL Pipeline
 ```
 
 ## Build and Run
 
+This project uses [Mise-en-Place](https://mise.jdx.dev) to manage the development
+environment and tasks.
+
 Build the project:
 
 ```bash
-gradle build
+mise run build
 ```
 
-Run the application (automatically builds as well):
+Run an assignment (automatically builds as well):
 
 ```bash
-gradle run -q
+mise run 1  # runs assignment 1
+mise run 2  # runs assignment 2
 ```

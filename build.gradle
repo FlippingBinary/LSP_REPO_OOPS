@@ -1,6 +1,5 @@
 plugins {
   id 'java'
-  id 'application'
 }
 
 repositories {
@@ -31,18 +30,4 @@ test {
 
 tasks.withType(JavaCompile).configureEach {
   options.release = 21
-}
-
-application {
-  mainClass = 'Router'
-}
-
-jar {
-  manifest {
-    attributes 'Main-Class': 'Router'
-  }
-}
-
-tasks.run.configure {
-  standardInput = System.in
 }

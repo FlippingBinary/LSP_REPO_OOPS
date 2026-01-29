@@ -9,3 +9,6 @@ outputs = ["build/**/*.class"]
 
 [tasks.start]
 run = "gradle run -q"
+
+[tasks.test]
+run = "gradle test"

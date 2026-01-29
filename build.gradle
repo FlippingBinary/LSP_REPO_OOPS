@@ -7,12 +7,26 @@ repositories {
   mavenCentral()
 }
 
+dependencies {
+  testImplementation 'org.junit.jupiter:junit-jupiter:5.10.2'
+  testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+}
+
 sourceSets {
   main {
     java {
       srcDirs = ['src']
     }
   }
+  test {
+    java {
+      srcDirs = ['test']
+    }
+  }
+}
+
+test {
+  useJUnitPlatform()
 }
 
 tasks.withType(JavaCompile).configureEach {

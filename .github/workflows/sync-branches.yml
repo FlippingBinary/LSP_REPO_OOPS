@@ -4,7 +4,8 @@ on:
   push:
     branches: [dev]
     paths:
-      - "**/*.java"
+      - "src/org/howard/edu/lsp/**/*.java"
+      - "data/**/*.csv"
 
 jobs:
   sync-branches:

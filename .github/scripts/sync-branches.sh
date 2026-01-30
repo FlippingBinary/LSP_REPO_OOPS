@@ -12,6 +12,8 @@ echo "=== Syncing $DEV_SHA from dev ==="
 
 # Store Java files in temp location
 find src/org/howard/edu/lsp -name "*.java" -exec cp --parents {} "$TEMP_DIR" \;
+# Store CSV files in temp location
+find data -name "*.csv" -exec cp --parents {} "$TEMP_DIR" \;
 
 # Try to checkout existing orphan branch, or create new one
 if git ls-remote --heads origin $TARGET_BRANCH | grep -q $TARGET_BRANCH; then

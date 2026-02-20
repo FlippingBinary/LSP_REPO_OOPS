@@ -4,7 +4,7 @@ import java.util.List;
 
 /**
  * ExtractResult encapsulates the results of a CSV extraction operation.
- * 
+ *
  * This immutable data container holds the extracted Product records along with
  * metadata about the extraction process (number of skipped rows).
  */
@@ -15,9 +15,9 @@ public class ExtractResult {
 
   /**
    * Constructs an ExtractResult with the extracted products and row counts.
-   * 
-   * @param products the list of successfully extracted Product records
-   * @param rowsRead the number of rows read from the CSV
+   *
+   * @param products    the list of successfully extracted Product records
+   * @param rowsRead    the number of rows read from the CSV
    * @param skippedRows the number of rows skipped during extraction
    */
   public ExtractResult(List<Product> products, int rowsRead, int skippedRows) {
@@ -28,7 +28,7 @@ public class ExtractResult {
 
   /**
    * Returns the list of extracted products.
-   * 
+   *
    * @return the list of Product records extracted from the CSV
    */
   public List<Product> getProducts() {
@@ -37,7 +37,7 @@ public class ExtractResult {
 
   /**
    * Returns the number of rows read from the CSV.
-   * 
+   *
    * @return the count of rows that were read
    */
   public int getRowsRead() {
@@ -46,7 +46,7 @@ public class ExtractResult {
 
   /**
    * Returns the number of rows skipped during extraction.
-   * 
+   *
    * @return the count of rows that were skipped
    */
   public int getSkippedRows() {

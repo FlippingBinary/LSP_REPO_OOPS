@@ -7,8 +7,9 @@ import java.nio.file.Paths;
 import java.util.List;
 
 /**
- * Orchestrates the Extract, Transform, Load (ETL) pipeline for CSV data processing.
- * 
+ * Orchestrates the Extract, Transform, Load (ETL) pipeline for CSV data
+ * processing.
+ *
  * This class serves as the main entry point for assignment 3, demonstrating
  * polymorphic input handling through the DataSource abstraction. The pipeline
  * extracts product data from a CSV source, applies business transformations,
@@ -26,9 +27,9 @@ public class ETLPipeline {
 
   /**
    * Constructs an ETLPipeline with default input and output file paths.
-   * 
-   * Delegates to the parameterized constructor using default paths:
-   * input from "data/products.csv" and output to "data/transformed_products.csv".
+   *
+   * Delegates to the parameterized constructor using default paths: input from
+   * "data/products.csv" and output to "data/transformed_products.csv".
    */
   public ETLPipeline() {
     this(DEFAULT_INPUT_PATH, DEFAULT_OUTPUT_PATH);
@@ -36,10 +37,10 @@ public class ETLPipeline {
 
   /**
    * Constructs an ETLPipeline with specified input and output file paths.
-   * 
-   * Creates the internal ETL components (extractor, transformer, loader)
-   * and stores the provided paths for pipeline execution.
-   * 
+   *
+   * Creates the internal ETL components (extractor, transformer, loader) and
+   * stores the provided paths for pipeline execution.
+   *
    * @param inputPath  the Path to the input CSV file containing product data
    * @param outputPath the Path where transformed product data will be written
    */
@@ -53,9 +54,10 @@ public class ETLPipeline {
 
   /**
    * Main entry point for the ETL pipeline application.
-   * 
-   * Creates a new ETLPipeline instance with default paths and executes the run method.
-   * 
+   *
+   * Creates a new ETLPipeline instance with default paths and executes the run
+   * method.
+   *
    * @param args command-line arguments (not used)
    */
   public static void main(String[] args) {
@@ -65,7 +67,7 @@ public class ETLPipeline {
 
   /**
    * Executes the ETL pipeline: extract, transform, load, and summarize.
-   * 
+   *
    * Orchestration steps:
    * 1. Verify input file exists
    * 2. Extract product data from FileDataSource wrapping the input path

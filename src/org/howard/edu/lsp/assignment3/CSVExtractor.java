@@ -8,7 +8,7 @@ import java.util.List;
 
 /**
  * Extracts product data from CSV content provided by a DataSource.
- * 
+ *
  * This class demonstrates polymorphism by accepting any DataSource
  * implementation, enabling polymorphic handling of different input sources
  * (files, strings, etc.) without needing to know the concrete type.
@@ -18,11 +18,11 @@ public class CSVExtractor {
 
   /**
    * Extracts product data from the given DataSource.
-   * 
-   * The method opens a BufferedReader from the source, parses CSV content,
-   * and returns an ExtractResult containing successfully parsed products
-   * along with row count metadata.
-   * 
+   *
+   * The method opens a BufferedReader from the source, parses CSV content, and
+   * returns an ExtractResult containing successfully parsed products along with
+   * row count metadata.
+   *
    * @param source the DataSource providing CSV content to extract
    * @return an ExtractResult containing extracted products and row counts
    * @throws IOException if the source cannot be opened or read

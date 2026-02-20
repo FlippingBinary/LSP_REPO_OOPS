@@ -4,10 +4,10 @@ import java.math.BigDecimal;
 
 /**
  * A product data model representing a single row from the input CSV.
- * 
+ *
  * This immutable class encapsulates product information including identifier,
- * name, price, and category. Instances are created through the public constructor
- * and accessed via getter methods.
+ * name, price, and category. Instances are created through the public
+ * constructor and accessed via getter methods.
  */
 public class Product {
   private final int productId;
@@ -17,11 +17,11 @@ public class Product {
 
   /**
    * Constructs a Product with the specified attributes.
-   * 
+   *
    * @param productId the unique identifier for this product
-   * @param name the name or title of the product
-   * @param price the price of the product as a BigDecimal
-   * @param category the category or classification of the product
+   * @param name      the name or title of the product
+   * @param price     the price of the product as a BigDecimal
+   * @param category  the category or classification of the product
    */
   public Product(int productId, String name, BigDecimal price, String category) {
     this.productId = productId;
@@ -32,7 +32,7 @@ public class Product {
 
   /**
    * Returns the product ID.
-   * 
+   *
    * @return the unique identifier for this product
    */
   public int getProductId() {
@@ -41,7 +41,7 @@ public class Product {
 
   /**
    * Returns the product name.
-   * 
+   *
    * @return the name or title of the product
    */
   public String getName() {
@@ -50,7 +50,7 @@ public class Product {
 
   /**
    * Returns the product price.
-   * 
+   *
    * @return the price of the product as a BigDecimal
    */
   public BigDecimal getPrice() {
@@ -59,7 +59,7 @@ public class Product {
 
   /**
    * Returns the product category.
-   * 
+   *
    * @return the category or classification of the product
    */
   public String getCategory() {

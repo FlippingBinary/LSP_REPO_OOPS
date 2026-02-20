@@ -5,8 +5,10 @@ import java.io.IOException;
 
 /**
  * Abstraction for data sources that provide CSV content via a BufferedReader.
+ *
  * This interface enables polymorphic handling of different input sources
- * (files, strings, etc.) without the consumer needing to know the concrete type.
+ * (files, strings, etc.) without the consumer needing to know the concrete
+ * type.
  */
 public interface DataSource {
   /**

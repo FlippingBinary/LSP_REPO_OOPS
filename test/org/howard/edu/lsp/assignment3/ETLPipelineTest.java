@@ -12,25 +12,27 @@ import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * Integration test for the ETLPipeline class.
- * Tests that the ETL pipeline correctly transforms product data from input CSV to output CSV,
- * comparing actual output against expected output file located in the project data directory.
+ *
+ * Tests that the ETL pipeline correctly transforms product data from input CSV
+ * to output CSV, comparing actual output against expected output file located
+ * in the project data directory.
  */
 class ETLPipelineTest {
 
-    @Test
-    void run_transformsProductsCsvToExpectedOutput(@TempDir Path tempDir) throws IOException {
-        Path inputPath = Paths.get("data", "products.csv");
-        Path expectedOutputPath = Paths.get("data", "transformed_products.csv");
-        Path actualOutputPath = tempDir.resolve("actual_output.csv");
+  @Test
+  void run_transformsProductsCsvToExpectedOutput(@TempDir Path tempDir) throws IOException {
+    Path inputPath = Paths.get("data", "products.csv");
+    Path expectedOutputPath = Paths.get("data", "transformed_products.csv");
+    Path actualOutputPath = tempDir.resolve("actual_output.csv");
 
-        ETLPipeline pipeline = new ETLPipeline(inputPath, actualOutputPath);
-        pipeline.run();
+    ETLPipeline pipeline = new ETLPipeline(inputPath, actualOutputPath);
+    pipeline.run();
 
-        assertTrue(Files.exists(actualOutputPath), "Output file should be created");
+    assertTrue(Files.exists(actualOutputPath), "Output file should be created");
 
-        String expectedContent = Files.readString(expectedOutputPath).trim();
-        String actualContent = Files.readString(actualOutputPath).trim();
+    String expectedContent = Files.readString(expectedOutputPath).trim();
+    String actualContent = Files.readString(actualOutputPath).trim();
 
-        assertEquals(expectedContent, actualContent);
-    }
+    assertEquals(expectedContent, actualContent);
+  }
 }

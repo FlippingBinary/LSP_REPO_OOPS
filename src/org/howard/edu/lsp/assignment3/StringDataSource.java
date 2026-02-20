@@ -6,6 +6,7 @@ import java.io.StringReader;
 
 /**
  * DataSource implementation that reads CSV content from a String.
+ *
  * Encapsulates in-memory string-based data retrieval behind the DataSource interface.
  */
 public class StringDataSource implements DataSource {

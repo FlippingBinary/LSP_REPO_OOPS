@@ -17,7 +17,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * Tests to verify Javadoc completeness for all assignment3 source files.
- * 
+ *
  * This test reads Java source files as text and uses regex matching to verify:
  * - Class/interface-level Javadoc exists
  * - All public methods have method-level Javadoc
@@ -38,24 +38,25 @@ class JavadocTest {
       "CSVExtractor.java",
       "ProductTransformer.java",
       "CSVLoader.java",
-      "ETLPipeline.java"
-  );
+      "ETLPipeline.java");
 
   // Pattern to match Javadoc comment: /** ... */
   private static final Pattern JAVADOC_PATTERN = Pattern.compile("/\\*\\*.*?\\*/", Pattern.DOTALL);
 
-  // Pattern to match class/interface declaration - must be at start of line or after whitespace
-  // and must have "public" before "class" or "interface"
-  private static final Pattern CLASS_DECLARATION_PATTERN = 
-      Pattern.compile("^\\s*public\\s+(?:abstract\\s+)?(?:class|interface)\\s+(\\w+)", Pattern.MULTILINE);
+  // Pattern to match class/interface declaration - must be at start of line or
+  // after whitespace and must have "public" before "class" or "interface"
+  private static final Pattern CLASS_DECLARATION_PATTERN = Pattern
+      .compile("^\\s*public\\s+(?:abstract\\s+)?(?:class|interface)\\s+(\\w+)", Pattern.MULTILINE);
 
-  // Pattern to match public method declarations (including static, not constructors)
-  private static final Pattern PUBLIC_METHOD_PATTERN = 
-      Pattern.compile("^\\s*public\\s+(?:static\\s+)?(?!class|interface)(?:<[^>]+>\\s+)?(\\S+)\\s+(\\w+)\\s*\\(([^)]*)\\)(?:\\s*throws\\s+([\\w,\\s]+))?\\s*[{;]", Pattern.MULTILINE);
+  // Pattern to match public method declarations (including static, not
+  // constructors)
+  private static final Pattern PUBLIC_METHOD_PATTERN = Pattern.compile(
+      "^\\s*public\\s+(?:static\\s+)?(?!class|interface)(?:<[^>]+>\\s+)?(\\S+)\\s+(\\w+)\\s*\\(([^)]*)\\)(?:\\s*throws\\s+([\\w,\\s]+))?\\s*[{;]",
+      Pattern.MULTILINE);
 
   // Pattern to match public constructor declarations
-  private static final Pattern PUBLIC_CONSTRUCTOR_PATTERN = 
-      Pattern.compile("^\\s*public\\s+(\\w+)\\s*\\(([^)]*)\\)(?:\\s*throws\\s+([\\w,\\s]+))?\\s*\\{", Pattern.MULTILINE);
+  private static final Pattern PUBLIC_CONSTRUCTOR_PATTERN = Pattern
+      .compile("^\\s*public\\s+(\\w+)\\s*\\(([^)]*)\\)(?:\\s*throws\\s+([\\w,\\s]+))?\\s*\\{", Pattern.MULTILINE);
 
   @ParameterizedTest(name = "File {0} has class-level Javadoc")
   @ValueSource(strings = {
@@ -85,27 +86,28 @@ class JavadocTest {
 
     // Check that there's a Javadoc comment before the class declaration
     String contentBeforeClass = content.substring(0, classPosition);
-    
+
     // Find the last Javadoc before the class declaration
     Matcher javadocMatcher = JAVADOC_PATTERN.matcher(contentBeforeClass);
     boolean foundJavadoc = false;
     int lastJavadocEnd = -1;
-    
+
     while (javadocMatcher.find()) {
       foundJavadoc = true;
       lastJavadocEnd = javadocMatcher.end();
     }
 
-    assertTrue(foundJavadoc, 
+    assertTrue(foundJavadoc,
         "Class " + className + " in " + fileName + " should have Javadoc comment");
 
-    // Verify the Javadoc is immediately before the class (only whitespace/annotations between)
+    // Verify the Javadoc is immediately before the class (only
+    // whitespace/annotations between)
     String between = contentBeforeClass.substring(lastJavadocEnd).trim();
     // Remove any annotations that might be between Javadoc and class
     between = between.replaceAll("@\\w+(?:\\([^)]*\\))?\\s*", "").trim();
     assertTrue(between.isEmpty() || between.startsWith("public") || between.startsWith("abstract"),
-        "Javadoc should be immediately before class declaration in " + fileName + 
-        ", found: '" + between + "'");
+        "Javadoc should be immediately before class declaration in " + fileName +
+            ", found: '" + between + "'");
   }
 
   @ParameterizedTest(name = "File {0} has complete method Javadoc")
@@ -152,9 +154,11 @@ class JavadocTest {
         String[] paramList = params.split(",");
         for (String param : paramList) {
           param = param.trim();
-          if (param.isEmpty()) continue;
-          
-          // Extract parameter name (last word before potential array brackets or generics)
+          if (param.isEmpty())
+            continue;
+
+          // Extract parameter name (last word before potential array brackets or
+          // generics)
           String[] parts = param.replaceAll("<[^>]+>", "").replaceAll("\\[\\]", "").trim().split("\\s+");
           if (parts.length >= 2) {
             String paramName = parts[parts.length - 1];
@@ -203,8 +207,9 @@ class JavadocTest {
         String[] paramList = params.split(",");
         for (String param : paramList) {
           param = param.trim();
-          if (param.isEmpty()) continue;
-          
+          if (param.isEmpty())
+            continue;
+
           String[] parts = param.replaceAll("<[^>]+>", "").replaceAll("\\[\\]", "").trim().split("\\s+");
           if (parts.length >= 2) {
             String paramName = parts[parts.length - 1];
@@ -242,7 +247,7 @@ class JavadocTest {
       errors.append("Missing @throws tags: ").append(missingThrowsTags).append("\n");
     }
 
-    assertTrue(errors.isEmpty(), 
+    assertTrue(errors.isEmpty(),
         "Javadoc issues in " + fileName + ":\n" + errors);
   }
 
@@ -250,21 +255,22 @@ class JavadocTest {
   void verifyAllSourceFilesExist() {
     for (String fileName : SOURCE_FILES) {
       Path filePath = SOURCE_DIR.resolve(fileName);
-      assertTrue(Files.exists(filePath), 
+      assertTrue(Files.exists(filePath),
           "Source file should exist: " + fileName);
     }
   }
 
   @Test
   void verifyAllTenFilesChecked() {
-    assertEquals(10, SOURCE_FILES.size(), 
+    assertEquals(10, SOURCE_FILES.size(),
         "Should check exactly 10 source files");
   }
 
   /**
-   * Finds the Javadoc comment immediately before the given position in the content.
-   * 
-   * @param content the source file content
+   * Finds the Javadoc comment immediately before the given position in the
+   * content.
+   *
+   * @param content  the source file content
    * @param position the position of the method/constructor declaration
    * @return the Javadoc comment text, or null if none found
    */
@@ -286,11 +292,12 @@ class JavadocTest {
       return null;
     }
 
-    // Verify the Javadoc is close to the method (only whitespace/annotations between)
+    // Verify the Javadoc is close to the method (only whitespace/annotations
+    // between)
     String between = searchArea.substring(lastJavadocEnd).trim();
     // Remove annotations (including @Override)
     between = between.replaceAll("@\\w+(?:\\([^)]*\\))?\\s*", "").trim();
-    
+
     // Should be empty or start with method modifiers
     if (between.isEmpty() || between.startsWith("public")) {
       return lastJavadoc;

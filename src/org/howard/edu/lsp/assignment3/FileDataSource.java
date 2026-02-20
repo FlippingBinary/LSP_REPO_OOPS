@@ -7,7 +7,9 @@ import java.nio.file.Path;
 
 /**
  * DataSource implementation that reads CSV content from a file.
- * Encapsulates file-based data retrieval behind the DataSource interface.
+ *
+ * This class encapsulates file-based data retrieval behind the DataSource
+ * interface.
  */
 public class FileDataSource implements DataSource {
   private final Path path;

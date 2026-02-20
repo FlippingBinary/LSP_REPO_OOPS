@@ -17,3 +17,7 @@ run = 'java -cp "$MISE_PROJECT_ROOT"/build/classes/java/main org.howard.edu.lsp.
 [tasks.2]
 depends = ["build"]
 run = 'java -cp "$MISE_PROJECT_ROOT"/build/classes/java/main org.howard.edu.lsp.assignment2.ETLPipeline'
+
+[tasks.3]
+depends = ["build"]
+run = 'java -cp "$MISE_PROJECT_ROOT"/build/classes/java/main org.howard.edu.lsp.assignment3.ETLPipeline'

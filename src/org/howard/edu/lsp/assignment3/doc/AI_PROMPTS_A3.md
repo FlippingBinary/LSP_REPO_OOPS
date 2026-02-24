@@ -17,19 +17,21 @@
 ## Analysis Summary
 
 ### Current Architecture (Assignment 2)
+
 7 classes in `org.howard.edu.lsp.assignment2`:
 
-| Class | Lines | Responsibilities | SRP Status |
-|-------|-------|-----------------|------------|
-| ETLPipeline | 75 | Orchestration, file validation, error handling, dependency wiring, output printing | ⚠️ 5 responsibilities |
-| CSVExtractor | 90 | File I/O, string parsing, BufferedReader parsing, field validation, Product creation | ⚠️ 4-5 responsibilities |
-| CSVLoader | 27 | Directory creation, CSV writing | ✅ Focused |
-| Product | 35 | Data container (immutable DTO) | ✅ Focused |
-| TransformedProduct | 46 | Data container + CSV serialization (toCsvRow) | ⚠️ 2 responsibilities |
-| ProductTransformer | 59 | Batch iteration, price/name/category transformation, price range classification | ⚠️ 3 responsibilities |
-| ExtractResult | 29 | Result container with stats | ✅ Focused |
+| Class              | Lines | Responsibilities                                                                     | SRP Status              |
+| ------------------ | ----- | ------------------------------------------------------------------------------------ | ----------------------- |
+| ETLPipeline        | 75    | Orchestration, file validation, error handling, dependency wiring, output printing   | ⚠️ 5 responsibilities   |
+| CSVExtractor       | 90    | File I/O, string parsing, BufferedReader parsing, field validation, Product creation | ⚠️ 4-5 responsibilities |
+| CSVLoader          | 27    | Directory creation, CSV writing                                                      | ✅ Focused              |
+| Product            | 35    | Data container (immutable DTO)                                                       | ✅ Focused              |
+| TransformedProduct | 46    | Data container + CSV serialization (toCsvRow)                                        | ⚠️ 2 responsibilities   |
+| ProductTransformer | 59    | Batch iteration, price/name/category transformation, price range classification      | ⚠️ 3 responsibilities   |
+| ExtractResult      | 29    | Result container with stats                                                          | ✅ Focused              |
 
 ### What's Already Good
+
 - Clear ETL separation (Extract → Transform → Load)
 - Immutable data objects (Product, ExtractResult)
 - Constants extracted (thresholds, field counts)
@@ -39,24 +41,29 @@
 ### OOP Improvement Opportunities
 
 **1. TransformedProduct.toCsvRow() — Mixed Responsibility**
+
 - Data model shouldn't know about CSV formatting
 - Serialization belongs in the Loader
 
 **2. ProductTransformer.transformProduct() — Multiple Transformations in One Method**
+
 - Name uppercasing, price discounting, category reclassification, rounding, and price range — all in one method
 - Each could be its own method or strategy, but this is a small program
 - Could extract: NameTransformation, PriceTransformation, CategoryTransformation, PriceRangeClassifier
 
 **3. CSVExtractor — Parsing + Validation + I/O**
+
 - Three `extract()` overloads handle different input sources
 - `parseProduct()` combines validation and construction
 - Could separate: CSVReader (I/O) from ProductParser (validation + creation)
 
 **4. ETLPipeline.run() — Orchestration + Error Handling + Printing**
+
 - File existence check, two separate try-catches, summary printing
 - Could extract summary printing, but may be over-engineering
 
 **5. No Interfaces**
+
 - No Extractor/Transformer/Loader interfaces
 - Tight coupling in ETLPipeline (creates dependencies directly)
 
@@ -66,11 +73,13 @@
 
 The current design already separates E, T, and L into distinct classes. The data models are clean.
 However, there ARE legitimate improvements:
+
 - Moving `toCsvRow()` out of TransformedProduct
 - Extracting individual transformation steps as named methods
 - Adding Javadocs (currently minimal single-line comments)
 
 The biggest wins for an "OOP redesign" assignment would be:
+
 1. **One public class per file** — Already satisfied ✅
 2. **Javadocs** — Only single-line `/** comments */` exist, no @param/@return
 3. **Better method decomposition** — Extract helper methods in transformer/extractor
@@ -82,6 +91,7 @@ The biggest wins for an "OOP redesign" assignment would be:
 **Output**: `data/transformed_products.csv` — 5 columns: ProductID,Name,Price,Category,PriceRange
 
 **Transformations**:
+
 1. Name → UPPERCASE
 2. Electronics price × 0.90 (10% discount)
 3. Price → 2 decimal places, HALF_UP rounding
@@ -89,12 +99,14 @@ The biggest wins for an "OOP redesign" assignment would be:
 5. PriceRange: ≤10="Low", ≤100="Medium", ≤500="High", >500="Premium"
 
 **Validation** (rows skipped silently):
+
 - Empty lines
 - Wrong field count (≠4)
 - Invalid ProductID (non-integer)
 - Invalid Price (non-decimal)
 
 **Summary output** (stdout):
+
 ```
 Rows read (excluding header): N
 Rows transformed: N
@@ -103,11 +115,13 @@ Output file: data/transformed_products.csv
 ```
 
 **Error messages**:
+
 - "Error: Input file not found: {path}"
 - "Error reading input file: {message}"
 - "Error writing output file: {message}"
 
 ### Test Infrastructure
+
 - JUnit 5.10.2 (JUnit Jupiter)
 - Java 21
 - Gradle build system
@@ -115,6 +129,7 @@ Output file: data/transformed_products.csv
 - Tests use string-based CSV input for unit tests, temp dirs for integration
 
 ## Resolved Questions
+
 - **Package name**: `org.howard.edu.lsp.assignment3` (confirmed by user)
 - **Tests**: Keep existing tests as-is. Add new tests to verify Javadoc completeness.
 - **Assignment 2 files**: Remain untouched.
@@ -123,11 +138,13 @@ Output file: data/transformed_products.csv
 ## OOP Concept Mapping (Oracle-Informed)
 
 ### Inheritance: TransformedProduct extends Product — NATURAL ✅
+
 TransformedProduct duplicates all 4 fields of Product. It IS-A Product with one additional field
 (priceRange) and one extra behavior (toCsvRow). Constructor chains with super(). Eliminates ~20 lines
 of duplication. Textbook inheritance use case.
 
 ### Polymorphism: Where does it fit?
+
 - **Polymorphic transformation steps (Strategy pattern)**: FORCED ❌ — Oracle says the 5 transformation
   steps are tightly coupled and sequential (discount before category check, rounding before price range).
   Would require mutable intermediate state and create 4-5 single-method classes for trivial logic.
@@ -138,13 +155,15 @@ of duplication. Textbook inheritance use case.
   is a clean polymorphism demonstration. The extractor then accepts a DataSource instead of overloads.
 
 ### Encapsulation: Already demonstrated but can be strengthened
+
 - Product/TransformedProduct already have private final fields with getters
 - Move toCsvRow() out of TransformedProduct (data model shouldn't know serialization format)
 - Better method visibility in ProductTransformer (determinePriceRange could be private)
 
 ## Proposed Design (Minimum Changes)
 
-### Class List for Assignment 3:
+### Class List for Assignment 3
+
 1. **Product** — Base class. Private final fields, getters, Javadoc. (modified from assignment2)
 2. **TransformedProduct extends Product** — Adds priceRange. Inherits 4 fields via super(). No toCsvRow(). (inheritance demo)
 3. **DataSource** (interface) — `BufferedReader open() throws IOException` (polymorphism demo)
@@ -157,13 +176,14 @@ of duplication. Textbook inheritance use case.
 10. **ETLPipeline** — orchestrator, main(). Uses FileDataSource.
 
 ### New class count: 10 (was 7, +3: DataSource interface, FileDataSource, StringDataSource)
+
 ### Removed: toCsvRow() from TransformedProduct → moved to CSVLoader
 
 ## Scope Boundaries
+
 - INCLUDE: New package assignment3, all classes with Javadoc, inheritance, polymorphism, encapsulation demo
 - INCLUDE: New Javadoc verification tests
 - INCLUDE: mise.toml update for `mise run 3`
 - EXCLUDE: Modifying assignment 1 or assignment 2 files
 - EXCLUDE: Changing data files or build.gradle
 - EXCLUDE: Changing any behavioral contract (inputs, outputs, transformations, error handling)
-

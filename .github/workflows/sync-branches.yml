@@ -5,6 +5,7 @@ on:
     branches: [dev]
     paths:
       - "src/org/howard/edu/lsp/**/*.java"
+      - "src/org/howard/edu/lsp/**/*.md"
       - "data/**/*.csv"
 
 jobs:

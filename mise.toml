@@ -21,3 +21,11 @@ run = 'java -cp "$MISE_PROJECT_ROOT"/build/classes/java/main org.howard.edu.lsp.
 [tasks.3]
 depends = ["build"]
 run = 'java -cp "$MISE_PROJECT_ROOT"/build/classes/java/main org.howard.edu.lsp.assignment3.ETLPipeline'
+
+[tasks.midterm-crccards]
+depends = ["build"]
+run = 'java -cp "$MISE_PROJECT_ROOT"/build/classes/java/main org.howard.edu.lsp.midterm.crccards.Driver'
+
+[tasks.midterm-strategy]
+depends = ["build"]
+run = 'java -cp "$MISE_PROJECT_ROOT"/build/classes/java/main org.howard.edu.lsp.midterm.strategy.Driver'

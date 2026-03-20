@@ -8,7 +8,7 @@ sources = ["src/**/*.java"]
 outputs = ["build/**/*.class"]
 
 [tasks.test]
-run = "gradle test"
+run = "gradle test --rerun"
 
 [tasks.1]
 depends = ["build"]

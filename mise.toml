@@ -8,7 +8,7 @@ sources = ["src/**/*.java"]
 outputs = ["build/**/*.class"]
 
 [tasks.test]
-run = "gradle test"
+run = "gradle test --rerun"
 
 [tasks.1]
 depends = ["build"]
@@ -29,3 +29,6 @@ run = 'java -cp "$MISE_PROJECT_ROOT"/build/classes/java/main org.howard.edu.lsp.
 [tasks.midterm-strategy]
 depends = ["build"]
 run = 'java -cp "$MISE_PROJECT_ROOT"/build/classes/java/main org.howard.edu.lsp.midterm.strategy.Driver'
+
+[tasks.javadoc]
+run = "gradle javadoc"

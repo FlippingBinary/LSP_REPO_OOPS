@@ -26,8 +26,17 @@ sourceSets {
 
 test {
   useJUnitPlatform()
+  testLogging {
+    events 'passed', 'skipped', 'failed'
+  }
 }
 
 tasks.withType(JavaCompile).configureEach {
   options.release = 21
+}
+
+javadoc {
+  source = sourceSets.main.allJava
+  destinationDir = file("${projectDir}/docs")
+  options.memberLevel = JavadocMemberLevel.PUBLIC
 }

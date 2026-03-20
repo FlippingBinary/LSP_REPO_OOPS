@@ -1,3 +1,6 @@
+# Local Javadoc build
+docs/
+
 bin/
 .gradle
 **/build/

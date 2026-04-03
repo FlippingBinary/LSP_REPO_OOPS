@@ -30,5 +30,9 @@ run = 'java -cp "$MISE_PROJECT_ROOT"/build/classes/java/main org.howard.edu.lsp.
 depends = ["build"]
 run = 'java -cp "$MISE_PROJECT_ROOT"/build/classes/java/main org.howard.edu.lsp.midterm.strategy.Driver'
 
+[tasks.5]
+depends = ["build"]
+run = 'java -cp "$MISE_PROJECT_ROOT"/build/classes/java/main org.howard.edu.lsp.assignment5.Driver'
+
 [tasks.javadoc]
 run = "gradle javadoc"

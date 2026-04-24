@@ -16,6 +16,7 @@ sourceSets {
   main {
     java {
       srcDirs = ['src']
+      exclude '**/*Test.java'
     }
   }
   test {
@@ -23,6 +24,13 @@ sourceSets {
       srcDirs = ['test']
     }
   }
+}
+
+sourceSets.test.java.srcDir 'src'
+sourceSets.test.java.exclude { details ->
+  if (details.isDirectory()) return false
+  def path = details.file.absolutePath.replace(File.separator, '/')
+  path.contains('/src/') && !path.endsWith('Test.java')
 }
 
 test {

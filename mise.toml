@@ -34,6 +34,10 @@ run = 'java -cp "$MISE_PROJECT_ROOT"/build/classes/java/main org.howard.edu.lsp.
 depends = ["build"]
 run = 'java -cp "$MISE_PROJECT_ROOT"/build/classes/java/main org.howard.edu.lsp.assignment5.Driver'
 
+[tasks.6]
+depends = ["build"]
+run = 'gradle test --rerun --tests "org.howard.edu.lsp.assignment6.IntegerSetTest"'
+
 [tasks.finalexam-q2]
 depends = ["build"]
 run = 'java -cp "$MISE_PROJECT_ROOT"/build/classes/java/main org.howard.edu.lsp.finalexam.question2.Driver'
